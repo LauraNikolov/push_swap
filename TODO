@@ -1,0 +1,9 @@
+Probleme a regler :
+    ☐ Segfault quand il y a 2 arguments
+    ☐ regler le probleme des nombres impairs 
+
+
+test: 
+    ☐ systeme de cout
+    ☐ target
+    ☐ position
