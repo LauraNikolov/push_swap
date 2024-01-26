@@ -1,6 +1,39 @@
 
 #include "test.h"
 
+/* int is_it_ordered(t_list **list)
+{
+    t_list *head;
+     head = *list;
+
+     while(list)
+     {
+        if((*list)->next->content < (*list)->content)
+            return(0);
+        *list = (*list)->next;
+     }
+     *list = head;
+        return(1);
+} */
+
+/* void    ft_last_push(t_list **a, t_list **b)
+{
+   if(!is_it_ordered(b))
+   {
+    printf("PAS ORDONNE\n")
+    ft_ordered(b);
+   } 
+   if(!is_it_ordered(a))
+   {
+    printf("PAS ORDONNE\n")
+    ft_ordered(a);
+   }
+
+   ft_init_push_end(a, b);
+
+
+} */
+
 
 int little_sort(t_list **nods, t_list **list)
 {
@@ -93,45 +126,47 @@ t_list  *find_target(t_list **a, t_list **b)
 
 void	ft_push_swap(t_list **a, t_list **b)
 {
-    /* t_list *best_nods;
-    t_list *a_head;
-    t_list *tmp;
-    int best_cost;
-
-    a_head = *a;
-    tmp = *a;
-    best_cost = (*a)->cost;
-    best_nods = ft_lstnew((*a)->content);
-    printf("mon best nods est : %d\n", best_nods->content);
-    while(tmp && ft_lst_size(a) > 3)
-    {
-        ft_init(a, b);
-        while(*a)
-        {
-            if((*a)->cost < best_cost)
-            {
-                best_cost = (*a)->cost;
-                best_nods = *a;
-            }
-            (*a) = (*a)->next;
-        }
-    printf("mon best nods est : %d\n", best_nods->content);
-    (*a) = a_head;
-    ft_push(&best_nods, a, b);
-    (*a) = a_head;
-    tmp = tmp->next; */
-
     t_list *save_a;
-    ft_init(a, b);
-    save_a = *a;
-    while(*a)
+    t_list *tmp;
+    t_list *head;
+    t_list *best_cost;
+    t_list *save_b;
+
+    tmp = *a;
+    best_cost = ft_lstnew(0);
+    save_b = *b;
+    while(ft_lst_size(&tmp) > 3)
     {
-        printf("target = %d\n", (*a)->target->content);
-        printf("content = %d\n", (*a)->content);
-        printf("cost = %d\n", (*a)->cost);
-        printf("position = %d\n\n", (*a)->position);
-        (*a) = (*a)->next;
+        save_a = *a;
+        best_cost = *a;
+        ft_init(a, b);
+        while(save_a)
+        {
+            if((tmp->cost < best_cost->cost))
+                best_cost = tmp;
+            save_a = save_a->next;
+        }
+        tmp = tmp->next;
+        printf("MON BEST NODS EST : %d\n", best_cost->content);
+        ft_rotate_to_top_push_a(&best_cost, a, a, b);
+        printf("LA TARGET DE MON BEST_NODS EST : %d\n", best_cost->target->content);
+        ft_rotate_to_top_push_b(&(best_cost->target), b);
+        ft_pb(a, b);
+        printf("MA LISTE A APRES LE PUSH\n");
+        ft_print_list(*a);
+        printf("MA LISTE B APRES LE PUSH\n");
+        ft_print_list(*b);
     }
-}   
+        ft_rotate_to_down(b, b);
+        printf("MA LISTE A APRES LE ROTATE\n");
+        ft_print_list(*b);
+}
+    // TODO; 
+    // 
+    // ! changer le fonctionnement des target;
+    // ! changer le fonctionnement des rotate_to_down;
+    
+
+
 
     

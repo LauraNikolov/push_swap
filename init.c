@@ -6,7 +6,7 @@
 /*   By: lnicolof <lnicolof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 15:58:09 by lnicolof          #+#    #+#             */
-/*   Updated: 2024/01/22 18:46:56 by lnicolof         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:25:29 by lnicolof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,22 @@ void   ft_init(t_list **a, t_list **b)
         (*a) = (*a)->next;
    } 
    (*a) = temp_a;
+}
+
+
+void ft_init_b(t_list **a, t_list **b)
+{
+     t_list *temp_b;
+     t_list *nods;
+     t_list **head_b;
+
+     temp_b = *b;
+     while(*b)
+     {
+         (*b)->target = find_target(b, a);
+         (*b)->position = ft_find_position(temp_b, (*b)->content);
+         (*b) = (*b)->next;
+     }
+     (*b) = temp_b;
 }
 

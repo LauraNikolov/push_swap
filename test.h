@@ -18,10 +18,13 @@ typedef struct s_list
 
 //push
 void    ft_push(t_list **nods, t_list **b, t_list **a);
+void ft_rotate_to_down(t_list **nods, t_list **list);
 
 //init
 void    ft_init(t_list **a, t_list **b);
 int     little_sort(t_list **nods, t_list **list);
+int     ft_cost(t_list *nods, t_list **a, t_list **b);
+void    ft_init_b(t_list **a, t_list **b);
 
 
 //parsing
@@ -61,7 +64,7 @@ void ft_push_swap(t_list **a, t_list **b);
 int ft_rotate_to_top(t_list **nods, t_list **list);
 void ft_rotate_to_top_a(t_list **nods, t_list **list);
 void ft_rotate_to_top_b(t_list **nods, t_list **list);
-void ft_rotate_to_top_push_a(t_list **nods, t_list **list);
+void ft_rotate_to_top_push_a(t_list **nods, t_list **list, t_list **a, t_list **b);
 void ft_rotate_to_top_push_b(t_list **nods, t_list **list);
 t_list *find_target(t_list **a, t_list **b);
 
