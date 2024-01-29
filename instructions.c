@@ -13,6 +13,7 @@ void	ft_sa(t_list **a)
 	*a = (*a)->next;
 	tmp->next = (*a)->next;
 	(*a)->next = tmp;
+	printf("sa\n");
 }
 /* sb (swap b ) : Intervertit les 2 premiers éléments au sommet de la pile b.
 Ne fait rien s’il n’y en a qu’un ou aucun. */
@@ -24,6 +25,7 @@ void	ft_sb(t_list **b)
 	*b = (*b)->next;
 	tmp->next = (*b)->next;
 	(*b)->next = tmp;
+	printf("sb\n");
 }
 /* ss : sa et sb en même temps */
 void	ft_ss(t_list **a, t_list **b)
@@ -39,6 +41,7 @@ void	ft_ss(t_list **a, t_list **b)
 	*b = (*b)->next;
 	tmp2->next = (*b)->next;
 	(*b)->next = tmp2;
+	printf("ss\n");
 }
 /* pa (push a) : Prend le premier élément au sommet de b et le met sur a.
 Ne fait rien si b est vide */
@@ -52,6 +55,7 @@ void	ft_pa(t_list **a, t_list **b)
 	*b = (*b)->next;
 	tmp->next = *a;
 	*a = tmp;
+	printf("pa\n");
 }
 /* 
 	    pb (push b) : Prend le premier élément au sommet de a et le met sur b.
@@ -66,6 +70,7 @@ void	ft_pb(t_list **a, t_list **b)
 	*a = (*a)->next;
 	tmp->next = *b;
 	*b = tmp;
+	printf("pb\n");
 }
 /* ra (rotate a) : Décale d’une position vers le haut tous les élements de la pile a.
 Le premier élément devient le dernier. */
@@ -80,6 +85,7 @@ void	ft_ra(t_list **a)
 	*a = (*a)->next;
 	last->next = first;
 	first->next = NULL;
+	printf("ra\n");
 }
 
 /* rb (rotate b) : Décale d’une position vers le haut tous les élements de la pile b.
@@ -95,12 +101,14 @@ void	ft_rb(t_list **b)
 	*b = (*b)->next;
 	last->next = first;
 	first->next = NULL;
+	printf("rb\n");
 }
 /* rr : ra et rb en même temps.*/
 void	ft_rr(t_list **a, t_list **b)
 {
 	ft_ra(a);
 	ft_rb(b);
+	printf("rr\n");
 }
 /* rra (reverse rotate a) : Décale d’une position vers le bas tous les élements de la pile a. Le dernier élément devient le premier.(=> pour choper l'avant dernier
 	->next->next) */
@@ -116,6 +124,7 @@ void	ft_rra(t_list **a)
 	second_to_last->next = NULL;
 	(*a) = last;
 	last->next = first;
+	printf("rra\n");
 }
 /* rrb (reverse rotate b) : Décale d’une position vers le bas tous les élements de
 la pile b. Le dernier élément devient le premier. */
@@ -131,10 +140,12 @@ void	ft_rrb(t_list **b)
 	second_to_last->next = NULL;
 	(*b) = last;
 	last->next = first;
+	printf("rrb\n");
 }
 /*rrr : rra et rrb en même temps */
 void	ft_rrr(t_list **a, t_list **b)
 {
 	ft_rra(a);
 	ft_rrb(b);
+	printf("rrr\n");
 }

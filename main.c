@@ -24,11 +24,11 @@ int main(int ac, char **av)
     ft_pb(&a, &b);
     ft_pb(&a, &b);
 
-    printf("a\n");
+   /*  printf("a\n");
     ft_print_list(a);
     printf("b\n");
     ft_print_list(b);
-
+ */
     ft_push_swap(&a, &b);
     
   /*   printf("a\n");
@@ -37,6 +37,7 @@ int main(int ac, char **av)
     ft_print_list(b); */
     //ft_free_tab(a);
     //ft_free_tab(b);
+
 
 }
 

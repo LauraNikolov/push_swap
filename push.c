@@ -6,7 +6,7 @@
 /*   By: lnicolof <lnicolof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:19:08 by lnicolof          #+#    #+#             */
-/*   Updated: 2024/01/26 18:58:44 by lnicolof         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:33:21 by lnicolof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
     ft_pa(a, b);
 } */
 
-void ft_rotate_to_top_push_a(t_list **nods, t_list **list, t_list **a, t_list **b)
+void ft_rotate_to_top_push_a(t_list **nods, t_list **list)
 {
     int median;
     int position;
@@ -82,16 +82,59 @@ void ft_rotate_to_down(t_list **nods, t_list **list)
     {
         while(position >= median && position <= ft_lst_size(list))
         {
-            ft_rrb(list);
+            ft_rra(list);
             position++;
         }
-        ft_rrb(list);
+        ft_rra(list);
     }
     else if(position == median)
     {
         while(position-- > 1)
-            ft_rb(list);
-        ft_rb(list);
+            ft_ra(list);
+        ft_ra(list);
     }
 }
+
+/* void ft_rotate_to_down(t_list **node, t_list **list)
+{
+    t_list *temp;
+    t_list *prev;
+    t_list *targetNode;
+    
+    if (*list == NULL || *node == NULL)
+        return;
+
+    temp = *list;
+    prev = NULL;
+    targetNode = *node;
+
+    // Find the target node
+    while (temp != NULL)
+    {
+        if (temp == targetNode)
+            break;
+        prev = temp;
+        temp = temp->next;
+    }
+
+    // If target is not the last node
+    if (temp != NULL && temp->next != NULL)
+    {
+        // Remove target node from current position
+        if (prev != NULL)
+            prev->next = temp->next;
+        else
+            *list = temp->next;
+
+        // Find the last node
+        temp = *list;
+        while (temp->next != NULL)
+            temp = temp->next;
+
+        // Insert target node at the end
+        temp->next = targetNode;
+        targetNode->next = NULL;
+    }
+} */
+
   
