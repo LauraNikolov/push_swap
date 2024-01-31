@@ -1,9 +1,7 @@
-Probleme a regler :
-    ☐ Segfault quand il y a 2 arguments
-    ☐ regler le probleme des nombres impairs 
-
-
-test: 
-    ☐ systeme de cout
-    ☐ target
-    ☐ position
+A faire : 
+☐ ! faire l'opti rr et rrr
+☐ mettre mes fonctions a 25 lignes
+☐ faire un makefile
+☐ regler le pb des doubles quotes
+☐ regler les soucis de parsing
+☐ reorganiser mes fichiers et mon .h

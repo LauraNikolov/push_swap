@@ -68,5 +68,6 @@ void ft_rotate_to_top_push_a(t_list **nods, t_list **list);
 void ft_rotate_to_top_push_b(t_list **nods, t_list **list);
 t_list *find_target(t_list **a, t_list **b);
 t_list  *find_target_a(t_list **a, t_list **b);
+int two_sort(t_list **list);
 
 #endif

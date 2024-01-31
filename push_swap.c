@@ -40,12 +40,12 @@ t_list  *find_target_a(t_list **a, t_list **b)
     t_list *target;
 
     save_a = *a;
-    target = ft_lstnew((ft_biggest(a))->content);
+    target = ft_biggest(a);
     while(save_a)
     {
         if(it_is_the_biggest(b, a))
         {
-            target = ft_biggest(a);
+            target = ft_smaller(a);
             //printf("je PASSE ICI et mon content est %d\n", (*b)->content);
             break;
         }
@@ -62,26 +62,50 @@ t_list  *find_target_a(t_list **a, t_list **b)
     }
     return(target);
 }
-
-
 int little_sort(t_list **list)
 {
-     if(ft_lst_size(list) == 3)
-     {
-          if((*list)->next->content < (*list)->content && (*list)->next->content < (*list)->next->next->content)
-               ft_sa(list);
-          else if((*list)->next->next->content < (*list)->content && (*list)->next->next->content < (*list)->next->content)
-               ft_rra(list);
-          else if((*list)->content < (*list)->next->content && (*list)->content < (*list)->next->next->content)
-               ft_ra(list);
-     }
+    t_list *tmp;
 
-     if(ft_lst_size(list) == 2)
-     {
-          if((*list)->next->content < (*list)->content)
-               ft_sa(list);
-     }
-     return (0);
+    tmp = *list;
+    //1 2 3
+    if(tmp->content < tmp->next->content && tmp->next->content < tmp->next->next->content)
+        return(0);
+    //1 3 2
+  else if(tmp->content < tmp->next->content && tmp->next->content > tmp->next->next->content && tmp->next->next->content > tmp->content)
+    {
+        ft_rra(list);
+        ft_sa(list);
+    }
+    //2 1 3
+    else if(tmp->content > tmp->next->content && tmp->next->content < tmp->next->next->content && tmp->content < tmp->next->next->content)
+        ft_sa(list);
+    //2 3 1
+   else if(tmp->content < tmp->next->content && tmp->next->content > tmp->next->next->content && tmp->next->next->content < tmp->content)
+    {
+        ft_rra(list);
+    }
+    //3 1 2
+    else if(tmp->content > tmp->next->content && tmp->next->content < tmp->next->next->content && tmp->content > tmp->next->next->content)
+    {
+        ft_ra(list);
+    }
+    //3 2 1
+    else if(tmp->content > tmp->next->content && tmp->next->content > tmp->next->next->content)
+    {
+        ft_ra(list);
+        ft_sa(list);
+    }
+    return(0);
+}
+
+int two_sort(t_list **list)
+{
+    t_list *tmp;
+
+    tmp = *list;
+    if(tmp->content > tmp->next->content)
+        ft_sa(list);
+    return(0);
 }
 
 int ft_rotate_to_top(t_list **nods, t_list **list)
@@ -94,8 +118,8 @@ int ft_rotate_to_top(t_list **nods, t_list **list)
     temp = *nods;
     cost = 0;
     median = ft_lst_size((list)) / 2;
-    if(ft_lst_size(list) <= 2)
-        return(little_sort(list));
+    if(ft_lst_size(list) == 2)
+        return(two_sort(list));
     position = ft_find_position(*list, temp->content);
     if(position < median)
         while(position-- > 1 && position < median)
@@ -111,8 +135,6 @@ int ft_rotate_to_top(t_list **nods, t_list **list)
             cost++;
   return(cost);
 }
-
-
 
 void ft_print_list(t_list *lst)
 {
@@ -184,35 +206,41 @@ void	ft_push_swap(t_list **a, t_list **b)
             save_a = save_a->next;
         }
         tmp = tmp->next;
-        printf("MON BEST NODS EST : %d\n", best_cost->content);
         ft_rotate_to_top_push_a(&best_cost, a);
-        printf("LA TARGET DE MON BEST_NODS EST : %d\n", best_cost->target->content);
         ft_rotate_to_top_push_b(&(best_cost->target), b);
         ft_pb(a, b);
-        printf("MA LISTE A APRES LE PUSH\n");
-        ft_print_list(*a);
-        printf("MA LISTE B APRES LE PUSH\n");
-        ft_print_list(*b);
-        little_sort(a);
-        printf("MA LISTE A APRES LE SORT\n");
-        ft_print_list(*a);
-        printf("MA LISTE B APRES LE SORT\n");
-        ft_print_list(*b);
     }
-    
-    while(*b)
+    if(ft_lst_size(&tmp) == 3)
+        little_sort(a);
+    printf("A\n");
+    ft_print_list(*a);
+    printf("B\n");
+    ft_print_list(*b);
+    int i = 0;
+// * MA FONCTION QUI PUSH EN ORDRE DECROISSSANT DANS LA B
+     while(*b)
     {
         ft_init_b(a, b);
-        printf("MON CONTENT EST : %d\n", (*b)->content);
-        printf("MA TARGET EST : %d\n", (*b)->target->content);
-        ft_rotate_to_top_push_a(&(*b)->target, a);
-        ft_pa(a, b);
+        printf("MA TARGET EST %d\n", (*b)->target->content);
+        // Tant que target != position faire les moves necessaire
+        if((*a)->content != (*b)->target->content)
+        {
+            ft_rotate_to_top_push_a(&((*b)->target), a);
+            ft_pa(a, b);
+        }
+        else if ((*a)->content == (*b)->target->content)
+            ft_pa(a, b);
+        printf("A MOVES TOUR NUMERO %d \n", i);
+        ft_print_list(*a);
+        printf("B MOVES TOUR NUMERO %d \n", i);
+        ft_print_list(*b);
+        i++;
+        
     }
-    (*b) = head_b;
-    (*a) = head_a;
-    printf("MA LISTE A APRES LE PUSH\n");
+    printf("A FINAL \n");
     ft_print_list(*a);
-    
+    printf("B FINAL\n");
+    ft_print_list(*b);
 } 
 
 
