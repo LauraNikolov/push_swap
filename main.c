@@ -20,7 +20,7 @@ int main(int ac, char **av)
     t_list *a;
     t_list *b;
     ft_parse(av, ac, &a);
-    //ft_arg_is_ok(a);
+    ft_arg_is_ok(a);
     ft_pb(&a, &b);
     ft_pb(&a, &b);
 

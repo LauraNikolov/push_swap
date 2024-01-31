@@ -118,8 +118,8 @@ int ft_rotate_to_top(t_list **nods, t_list **list)
     temp = *nods;
     cost = 0;
     median = ft_lst_size((list)) / 2;
-    if(ft_lst_size(list) == 2)
-        return(two_sort(list));
+    /* if(ft_lst_size(list) == 2)
+        return(two_sort(list)); */
     position = ft_find_position(*list, temp->content);
     if(position < median)
         while(position-- > 1 && position < median)
@@ -187,6 +187,7 @@ void	ft_push_swap(t_list **a, t_list **b)
     t_list *head_b;
     t_list *head_a;
     t_list *test;
+    t_list *smaller;
 
     tmp = *a;
     best_cost = ft_lstnew(0);
@@ -210,18 +211,17 @@ void	ft_push_swap(t_list **a, t_list **b)
         ft_rotate_to_top_push_b(&(best_cost->target), b);
         ft_pb(a, b);
     }
-    if(ft_lst_size(&tmp) == 3)
-        little_sort(a);
-    printf("A\n");
+    little_sort(a);
+  /*   printf("A\n");
     ft_print_list(*a);
     printf("B\n");
-    ft_print_list(*b);
-    int i = 0;
+    ft_print_list(*b); 
+    int i = 0; */
 // * MA FONCTION QUI PUSH EN ORDRE DECROISSSANT DANS LA B
      while(*b)
     {
         ft_init_b(a, b);
-        printf("MA TARGET EST %d\n", (*b)->target->content);
+        //printf("MA TARGET EST %d\n", (*b)->target->content);
         // Tant que target != position faire les moves necessaire
         if((*a)->content != (*b)->target->content)
         {
@@ -230,14 +230,16 @@ void	ft_push_swap(t_list **a, t_list **b)
         }
         else if ((*a)->content == (*b)->target->content)
             ft_pa(a, b);
-        printf("A MOVES TOUR NUMERO %d \n", i);
+       /* printf("A MOVES TOUR NUMERO %d \n", i);
         ft_print_list(*a);
         printf("B MOVES TOUR NUMERO %d \n", i);
         ft_print_list(*b);
-        i++;
-        
+        i++; */
     }
-    printf("A FINAL \n");
+    smaller = ft_smaller(a);
+   if(smaller->content != (*a)->content)
+         ft_rotate_to_top_push_a(&smaller, a);
+     printf("A FINAL \n");
     ft_print_list(*a);
     printf("B FINAL\n");
     ft_print_list(*b);
