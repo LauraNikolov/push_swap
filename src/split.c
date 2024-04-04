@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lnicolof <lnicolof@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/13 14:44:36 by lnicolof          #+#    #+#             */
+/*   Updated: 2024/04/04 16:37:37 by lnicolof         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "test.h"
+#include "../includes/pushswap.h"
 
-static char	**ft_freestrs(char **strs, size_t words)
+char	**ft_freestrs(char **strs, size_t words)
 {
 	size_t	i;
 
 	i = 0;
+	if (strs == NULL)
+		return (NULL);
 	while (i < words)
 	{
 		free(strs[i]);
@@ -65,6 +78,10 @@ static size_t	ft_countwords(char const *s, char c)
 		while (s[i] != c && s[i])
 			i++;
 	}
+	if (words == 1 && is_it_nbr((char *)s))
+		return (exit(0), 0);
+	else if (words == 1 && !is_it_nbr((char *)s))
+		return (ft_error(), 0);
 	return (words);
 }
 
